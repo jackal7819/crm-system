@@ -4,7 +4,7 @@
 
 <template>
 		<NuxtLink
-			class="flex w-full px-3 py-1 mb-2 duration-300 rounded-lg align-items-center hover:bg-gray-700 hover:shadow text-slate-400 hover:text-amber-700"
+			class="flex items-center w-full px-3 py-2 mb-2 duration-300 rounded-lg hover:bg-gray-700 hover:shadow text-slate-400 hover:text-yellow-500"
 			v-for="link in menuItems"
 			:key="link.name"
 			:to="link.url"
