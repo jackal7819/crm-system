@@ -29,4 +29,12 @@ export default defineNuxtConfig({
 			},
 		},
 	},
+	runtimeConfig: {
+		idApp: process.env.NUXT_APP_WRITE_ID,
+		idDb: process.env.NUXT_DB_ID,
+		idDeals: process.env.COLLECTION_DEALS,
+		idCustomers: process.env.NUXT_COLLECTION_CUSTOMERS,
+		idComments: process.env.NUXT_COLLECTION_COMMENTS,
+		idStorage: process.env.NUXT_STORAGE_ID,
+	},
 });
