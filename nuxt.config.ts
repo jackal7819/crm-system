@@ -22,6 +22,9 @@ export default defineNuxtConfig({
 		prefix: 'Ui',
 		componentDir: './components/ui',
 	},
+	pinia: {
+		storesDirs: ['./stores/**'],
+	},
 	googleFonts: {
 		families: {
 			'Montserrat+Alternates': {
