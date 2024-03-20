@@ -1,4 +1,4 @@
-<script lang="ts" setup></script>
+<script setup lang="ts"></script>
 
 <template>
 	<aside class="relative flex flex-col justify-between w-full h-full px-5 py-8 pb-16 bg-slate-900">

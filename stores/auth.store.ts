@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
 });
 
 export const useIsLoadingStore = defineStore('isLoading', () => {
-	const isLoading = ref(true);
+	const isLoading = ref(false);
 
 	const getIsLoading = () => isLoading.value;
 
