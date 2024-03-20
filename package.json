@@ -1,6 +1,6 @@
 {
-	"name": "nuxt-app",
-	"private": true,
+	"name": "crm-system",
+	"private": false,
 	"type": "module",
 	"scripts": {
 		"build": "nuxt build",
@@ -17,6 +17,7 @@
 		"appwrite": "^14.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
+		"nanoid": "^5.0.6",
 		"nuxt": "^3.10.3",
 		"pinia": "^2.1.7",
 		"radix-vue": "^1.5.2",
@@ -34,5 +35,11 @@
 	},
 	"overrides": {
 		"vue": "latest"
-	}
+	},
+	"version": "1.0.0",
+	"description": "crm-system",
+	"main": "layouts/default.vue",
+	"repository": "https://github.com/jackal7819/crm-system.git",
+	"author": "Viktor Filippov <jackal3166@gmail.com>",
+	"license": "MIT"
 }

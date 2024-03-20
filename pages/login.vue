@@ -1,14 +1,14 @@
 <script setup lang="ts">
-	import type { AppwriteException } from 'appwrite';
+	import { nanoid } from 'nanoid';
 
 	useSeoMeta({
 		title: 'Login | CRM System',
 	});
 
-	const name = ref('');
-	const email = ref('');
-	const password = ref('');
-	const error = ref('');
+	const nameRef = ref('');
+	const emailRef = ref('');
+	const passwordRef = ref('');
+	const errorRef = ref('');
 
 	const isLoadingStore = useIsLoadingStore();
 	const authStore = useAuthStore();
@@ -18,8 +18,8 @@
 		isLoadingStore.isLoading = true;
 		try {
 			await account.createEmailPasswordSession(
-				email.value,
-				password.value
+				emailRef.value,
+				passwordRef.value
 			);
 			const user = await account.get();
 			authStore.setUser({
@@ -28,18 +28,28 @@
 				status: user.status,
 			});
 
-			name.value = '';
-			email.value = '';
-			password.value = '';
+			nameRef.value = '';
+			emailRef.value = '';
+			passwordRef.value = '';
 
 			await router.push('/');
 			isLoadingStore.isLoading = false;
 		} catch (err: unknown) {
 			if (err instanceof Error) {
-				error.value = err.message;
+				errorRef.value = err.message;
 			}
 			isLoadingStore.isLoading = false;
 		}
+	};
+
+	const handleRegister = async () => {
+		await account.create(
+			nanoid(),
+			nameRef.value,
+			emailRef.value,
+			passwordRef.value
+		);
+		await handleLogin();
 	};
 </script>
 
@@ -49,40 +59,39 @@
 			<h1 class="mb-10 text-3xl font-bold text-center">Login</h1>
 			<form class="flex flex-col gap-5">
 				<UiInput
-					v-model="name"
+					v-model="nameRef"
 					placeholder="Name"
-					label="name"
 					type="name"
 					class="text-lg"
 				/>
 				<UiInput
-					v-model="email"
+					v-model="emailRef"
 					placeholder="Email"
-					label="Email"
 					type="email"
 					class="text-lg"
 				/>
 				<UiInput
-					v-model="password"
+					v-model="passwordRef"
 					placeholder="Password"
-					label="Password"
 					type="password"
 					class="text-lg"
 				/>
 				<div class="flex justify-center gap-5">
 					<UiButton
+						@click="handleLogin"
 						type="button"
 						class="text-lg w-28 hover:text-yellow-500"
 						>Login</UiButton
 					>
 					<UiButton
+						@click="handleRegister"
 						type="button"
 						class="text-lg w-28 hover:text-yellow-500"
 						>Register</UiButton
 					>
 				</div>
-				<div v-if="error" class="text-red-500">
-					{{ error }}
+				<div v-if="errorRef" class="text-red-500">
+					{{ errorRef }}
 				</div>
 			</form>
 		</div>
