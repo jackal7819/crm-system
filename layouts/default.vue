@@ -19,8 +19,9 @@
 </script>
 
 <template>
-	<section class="grid h-screen grid-cols-[1fr_6fr]">
-		<LayoutSidebar v-if='authStore.getUser()' />
+	<LayoutLoader v-if="isLoadingStore.isLoading" />
+	<section v-else :class="{'grid h-screen grid-cols-[1fr_6fr]': authStore.getUser().status}">
+		<LayoutSidebar v-if='authStore.getUser().status' />
 		<slot />
 	</section>
 </template>

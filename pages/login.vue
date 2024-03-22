@@ -45,9 +45,9 @@
 	const handleRegister = async () => {
 		await account.create(
 			nanoid(),
-			nameRef.value,
 			emailRef.value,
-			passwordRef.value
+			passwordRef.value,
+			nameRef.value
 		);
 		await handleLogin();
 	};
