@@ -17,6 +17,7 @@
 		"appwrite": "^14.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
+		"dayjs": "^1.11.10",
 		"nanoid": "^5.0.6",
 		"nuxt": "^3.10.3",
 		"pinia": "^2.1.7",
