@@ -11,7 +11,7 @@
 	<div
 		:class="
 			cn(
-				'rounded-xl border border-slate-400 bg-slate-900 text-slate-400 duration-300 hover:shadow-lg hover:shadow-slate-400 text-card-foreground animation',
+				'rounded-xl border border-transparent bg-slate-900 text-slate-400 duration-300 hover:border-slate-400 text-card-foreground animation',
 				props.class
 			)
 		"
