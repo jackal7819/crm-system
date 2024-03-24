@@ -1,7 +1,12 @@
 <script setup lang="ts">
+	import type { ICard, IColumn } from '@/components/kanban/kanban.types';
+
 	useSeoMeta({
 		title: 'Home | CRM System',
-	})
+	});
+
+	const dragCardRef = ref<ICard | null>(null);
+	const sourceColumnRef = ref<IColumn | null>(null);
 </script>
 
 <template>
