@@ -17,7 +17,12 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		'@nuxtjs/google-fonts',
 		'nuxt-icon',
+		'@vee-validate/nuxt',
 	],
+	veeValidate: {
+		// disable or enable auto imports
+		autoImports: true,
+	},
 	shadcn: {
 		prefix: 'Ui',
 		componentDir: './components/ui',
