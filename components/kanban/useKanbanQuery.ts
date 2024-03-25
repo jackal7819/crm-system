@@ -17,7 +17,7 @@ export const useKanbanQuery = () => {
 				if (board) {
 					board.cards.push({
 						id: deal.$id,
-						title: deal.title,
+						name: deal.name,
 						price: deal.price,
 						$createdAt: deal.$createdAt,
 						companyName: deal.customer.name,

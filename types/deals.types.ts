@@ -23,7 +23,7 @@ export enum EnumStatus {
 }
 
 export interface IDeal extends IBaseField {
-	title: string;
+	name: string;
 	price: number;
 	customer: ICustomer;
 	comments: IComment[];

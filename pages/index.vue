@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import type { ICard, IColumn } from '@/components/kanban/kanban.types';
 	import { useKanbanQuery } from '@/components/kanban/useKanbanQuery';
+	import dayjs from 'dayjs';
 
 	useSeoMeta({
 		title: 'Home | CRM System',
@@ -35,14 +36,28 @@
 			<div class="grid grid-cols-5 gap-6 2xl:gap-16">
 				<div v-for="(column, index) in data" :key="column.id">
 					<div
-						class="px-5 py-1 mb-2 text-center rounded bg-slate-400 text-slate-900"
+						class="px-5 py-1 mb-3 text-center rounded bg-slate-400 text-slate-900"
 					>
 						{{ column.title }}
 					</div>
-					<UiCard draggable="true">
-						<UiCardHeader role="button"> name card </UiCardHeader>
-						<UiCardContent> Company </UiCardContent>
-						<UiCardFooter> Date </UiCardFooter>
+					<UiCard
+						v-for="card in column.cards"
+						:key="card.name"
+						draggable="true"
+						class="mb-3"
+					>
+						<UiCardHeader role="button">
+							<UiCardTitle>{{ card.name }}</UiCardTitle>
+							<UiCardDescription>{{
+								convertCurrency(card.price)
+							}}</UiCardDescription>
+						</UiCardHeader>
+						<UiCardContent
+							>Company: {{ card.companyName }}</UiCardContent
+						>
+						<UiCardFooter>{{
+							dayjs(card.$createdAt).format('DD MMMM YYYY')
+						}}</UiCardFooter>
 					</UiCard>
 				</div>
 			</div>
