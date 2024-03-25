@@ -17,11 +17,11 @@
 	const handleLogin = async () => {
 		isLoadingStore.isLoading = true;
 		try {
-			await account.createEmailPasswordSession(
+			await useAppwriteClient().account.createEmailPasswordSession(
 				emailRef.value,
 				passwordRef.value
 			);
-			const user = await account.get();
+			const user = await useAppwriteClient().account.get();
 			authStore.setUser({
 				name: user.name,
 				email: user.email,
@@ -43,7 +43,7 @@
 	};
 
 	const handleRegister = async () => {
-		await account.create(
+		await useAppwriteClient().account.create(
 			nanoid(),
 			emailRef.value,
 			passwordRef.value,

@@ -5,7 +5,7 @@
 
 	const handleLogout = async () => {
 		isLoadingStore.isLoading = true;
-		await account.deleteSession('current');
+		await useAppwriteClient().account.deleteSession('current');
 		authStore.removeUser();
 		router.push('/login');
 		isLoadingStore.isLoading = false;
