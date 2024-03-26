@@ -4,7 +4,7 @@
 	import dayjs from 'dayjs';
 	import type { EnumStatus } from '@/types/deals.types';
 	import { useMutation } from '@tanstack/vue-query';
-
+	import { generateColumnStyle } from '@/utils/generateColumnStyle';
 	useSeoMeta({
 		title: 'Home | CRM System',
 	});
@@ -76,13 +76,14 @@
 		<div v-else>
 			<div class="grid grid-cols-5 gap-6 2xl:gap-16">
 				<div
-					v-for="column in data"
+					v-for="(column, index) in data"
 					:key="column.id"
 					@dragover="handleDragOver"
 					@drop="handleDrop(column)"
 				>
 					<div
-						class="px-5 py-1 mb-3 text-center rounded bg-slate-400 text-slate-900"
+						class="px-5 py-1 mb-3 font-semibold text-center rounded text-slate-900"
+						:style="generateColumnStyle(index, data?.length)"
 					>
 						{{ column.title }}
 					</div>
