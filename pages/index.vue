@@ -2,6 +2,8 @@
 	import type { ICard, IColumn } from '@/components/kanban/kanban.types';
 	import { useKanbanQuery } from '@/components/kanban/useKanbanQuery';
 	import dayjs from 'dayjs';
+	import type { EnumStatus } from '@/types/deals.types';
+	import { useMutation } from '@tanstack/vue-query';
 
 	useSeoMeta({
 		title: 'Home | CRM System',
@@ -10,7 +12,46 @@
 	const dragCardRef = ref<ICard | null>(null);
 	const sourceColumnRef = ref<IColumn | null>(null);
 
+	const config = useRuntimeConfig();
+
 	const { data, isPending, refetch } = useKanbanQuery();
+
+	type TypeMutationVariables = {
+		docId: string;
+		status?: EnumStatus;
+	};
+
+	const { mutate } = useMutation({
+		mutationKey: ['move-card'],
+		mutationFn: ({ docId, status }: TypeMutationVariables) => {
+			return useAppwriteClient().database.updateDocument(
+				config.public.dBId,
+				config.public.collectionsDeals,
+				docId,
+				{
+					status,
+				}
+			);
+		},
+		onSuccess: () => {
+			refetch();
+		},
+	});
+
+	const handleDragStart = (card: ICard, column: IColumn) => {
+		dragCardRef.value = card;
+		sourceColumnRef.value = column;
+	};
+
+	const handleDragOver = (event: DragEvent) => {
+		event.preventDefault();
+	};
+
+	const handleDrop = (targetColumn: IColumn) => {
+		if (dragCardRef.value && sourceColumnRef.value) {
+			mutate({ docId: dragCardRef.value.id, status: targetColumn.id });
+		}
+	};
 </script>
 
 <template>
@@ -34,17 +75,23 @@
 		</button>
 		<div v-else>
 			<div class="grid grid-cols-5 gap-6 2xl:gap-16">
-				<div v-for="column in data" :key="column.id">
+				<div
+					v-for="column in data"
+					:key="column.id"
+					@dragover="handleDragOver"
+					@drop="handleDrop(column)"
+				>
 					<div
 						class="px-5 py-1 mb-3 text-center rounded bg-slate-400 text-slate-900"
 					>
 						{{ column.title }}
 					</div>
-					<KanbanCreateDeal :refetch='refetch' :status="column.id" />
+					<KanbanCreateDeal :refetch="refetch" :status="column.id" />
 					<UiCard
 						v-for="card in column.cards"
 						:key="card.name"
 						draggable="true"
+						@dragstart="handleDragStart(card, column)"
 						class="mb-3"
 					>
 						<UiCardHeader role="button">
