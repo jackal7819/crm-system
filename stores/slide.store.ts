@@ -1,4 +1,4 @@
-import type { ICard } from '~/components/kanban/kanban.types';
+import type { ICard } from '@/components/kanban/kanban.types';
 
 const defaultValue: { card: ICard | null; isOpen: boolean } = {
 	card: null,
@@ -8,7 +8,7 @@ const defaultValue: { card: ICard | null; isOpen: boolean } = {
 export const useSlideStore = defineStore('slide', () => {
 	const slide = ref(defaultValue);
 
-	const getSlide = () => slide.value;
+	const getSlide = () => computed(() => slide.value);
 
 	const setSlide = (card: ICard) => (slide.value = { card, isOpen: true });
 	const clearSlide = () => (slide.value = defaultValue);

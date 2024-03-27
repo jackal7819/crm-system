@@ -15,7 +15,7 @@ const defaultValue: { user: IAuthStore } = {
 export const useAuthStore = defineStore('auth', () => {
 	const user = ref(defaultValue.user);
 
-	const getUser = () => user.value;
+	const getUser = () => computed(() => user.value);
 
 	const setUser = (input: IAuthStore) => (user.value = input);
 
