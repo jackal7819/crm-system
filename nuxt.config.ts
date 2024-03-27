@@ -11,16 +11,15 @@ export default defineNuxtConfig({
 	},
 	devtools: { enabled: false },
 	modules: [
-		'@nuxtjs/tailwindcss',
 		'shadcn-nuxt',
 		'@nuxt/image',
 		'@pinia/nuxt',
 		'@nuxtjs/google-fonts',
 		'nuxt-icon',
 		'@vee-validate/nuxt',
+		'@nuxt/ui',
 	],
 	veeValidate: {
-		// disable or enable auto imports
 		autoImports: true,
 	},
 	shadcn: {
